@@ -1,7 +1,7 @@
 struct DayOne: Solver {
     let day = 1
 
-    func a(input: String) -> String {
+    func a(input: String) -> Int {
         let lines = input.split(separator: "\n")
         let regex = #/[^0-9]/#
         let numbers = lines.map { line in
@@ -9,10 +9,10 @@ struct DayOne: Solver {
             let (first, last) = (nums.first!, nums.last!)
             return Int("\(first)\(last)")!
         }
-        return String(numbers.reduce(0, +))
+        return (numbers.reduce(0, +))
     }
 
-    func b(input: String) -> String {
+    func b(input: String) -> Int {
         let strMap = [
             "one": "o1e",
             "two": "t2o",

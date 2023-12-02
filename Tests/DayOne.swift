@@ -18,7 +18,7 @@ class DayOneSpec: QuickSpec {
                 a1b2c3d4e5f
                 treb7uchet
                 """
-                let expected = "142"
+                let expected = 142
                 let output = day.a(input: input)
                 expect(output).to(equal(expected))
             }
@@ -33,7 +33,7 @@ class DayOneSpec: QuickSpec {
                 zoneight234
                 7pqrstsixteen
                 """
-                let expected = "281"
+                let expected = 281
                 let output = day.b(input: input)
                 expect(output).to(equal(expected))
             }

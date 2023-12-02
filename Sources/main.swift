@@ -1,7 +1,9 @@
 import ArgumentParser
 
 var days: [Int: Solver.Type] = [:]
+// woop woop 1 based indexing
 days[1] = DayOne.self
+days[2] = DayTwo.self
 
 struct AOCError: Error {
     var message: String

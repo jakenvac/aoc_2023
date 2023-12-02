@@ -3,12 +3,12 @@ protocol Solver {
 
     var day: Int { get }
 
-    func a(input: String) -> String
-    func b(input: String) -> String
+    func a(input: String) -> Int
+    func b(input: String) -> Int
 }
 
 extension Solver {
-    func solve(part: DayPart, input: String) -> String {
+    func solve(part: DayPart, input: String) -> Int {
         return switch part {
         case .a: a(input: input)
         case .b: b(input: input)
