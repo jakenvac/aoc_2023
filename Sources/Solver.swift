@@ -3,15 +3,15 @@ protocol Solver {
 
     var day: Int { get }
 
-    func a(input: String) -> Int
-    func b(input: String) -> Int
+    func a(lines: [String]) -> Int
+    func b(lines: [String]) -> Int
 }
 
 extension Solver {
-    func solve(part: DayPart, input: String) -> Int {
+    func solve(part: DayPart, lines: [String]) -> Int {
         return switch part {
-        case .a: a(input: input)
-        case .b: b(input: input)
+        case .a: a(lines: lines)
+        case .b: b(lines: lines)
         }
     }
 }

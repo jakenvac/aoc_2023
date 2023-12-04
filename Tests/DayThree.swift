@@ -23,9 +23,9 @@ class DayThreeSpec: QuickSpec {
                 ......755.
                 ...$.*....
                 .664.598..
-                """
+                """.split(separator: "\n").map { String($0) }
                 let expected = 4361
-                let output = day.a(input: input)
+                let output = day.a(lines: input)
                 expect(output).to(equal(expected))
             }
 
@@ -41,9 +41,9 @@ class DayThreeSpec: QuickSpec {
                 ......755.
                 ...$.*....
                 .664.598..
-                """
+                """.split(separator: "\n").map { String($0) }
                 let expected = 467835
-                let output = day.b(input: input)
+                let output = day.b(lines: input)
                 expect(output).to(equal(expected))
             }
         }

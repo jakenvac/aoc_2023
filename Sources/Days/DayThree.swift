@@ -8,7 +8,7 @@ struct NumberRange {
 struct DayThree: Solver {
     let day = 3
 
-    private func extractRange(line: Substring?, start: Int, end: Int) -> Substring {
+    private func extractRange(line: String?, start: Int, end: Int) -> Substring {
         guard let line = line else {
             return ""
         }
@@ -41,7 +41,7 @@ struct DayThree: Solver {
         return m.count > 0
     }
 
-    private func findNumbers(str: Substring) -> [NumberRange] {
+    private func findNumbers(str: String) -> [NumberRange] {
         var ranges: [NumberRange] = []
 
         var firstDigitInChunk = -1
@@ -72,11 +72,10 @@ struct DayThree: Solver {
         return ranges
     }
 
-    func a(input: String) -> Int {
-        let lines = input.split(separator: "\n")
+    func a(lines: [String]) -> Int {
         let numbers = lines.enumerated().flatMap { index, line in
-            let lastLine: Substring? = index == 0 ? nil : lines[index - 1]
-            let nextLine: Substring? = index == lines.count - 1 ? nil : lines[index + 1]
+            let lastLine: String? = index == 0 ? nil : lines[index - 1]
+            let nextLine: String? = index == lines.count - 1 ? nil : lines[index + 1]
             let validNumbers = findNumbers(str: line).compactMap { r in
 
                 let above = extractRange(line: lastLine, start: r.start - 1, end: r.end + 1)
@@ -95,8 +94,7 @@ struct DayThree: Solver {
         return numbers.reduce(0, +)
     }
 
-    func b(input: String) -> Int {
-        let lines = input.split(separator: "\n")
+    func b(lines: [String]) -> Int {
         let numbers = lines.enumerated().reduce(into: [Int: [NumberRange]]()) { dict, tuple in
             let (index, line) = tuple
             let validNumbers = findNumbers(str: line)
@@ -109,8 +107,7 @@ struct DayThree: Solver {
                 func mapAdjacent(row: Int, num: NumberRange) -> Int? {
                     if (num.start <= col && num.end >= col) ||
                         num.end == col - 1 ||
-                        num.start == col + 1
-                    {
+                        num.start == col + 1 {
                         let numberStr = extractRange(
                             line: lines[row],
                             start: num.start,

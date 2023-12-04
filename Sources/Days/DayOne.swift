@@ -1,18 +1,17 @@
 struct DayOne: Solver {
     let day = 1
 
-    func a(input: String) -> Int {
-        let lines = input.split(separator: "\n")
+    func a(lines: [String]) -> Int {
         let regex = #/[^0-9]/#
         let numbers = lines.map { line in
             let nums = line.replacing(regex, with: "")
             let (first, last) = (nums.first!, nums.last!)
             return Int("\(first)\(last)")!
         }
-        return (numbers.reduce(0, +))
+        return numbers.reduce(0, +)
     }
 
-    func b(input: String) -> Int {
+    func b(lines: [String]) -> Int {
         let strMap = [
             "one": "o1e",
             "two": "t2o",
@@ -25,10 +24,14 @@ struct DayOne: Solver {
             "nine": "n9e",
         ]
 
-        var newInput = input
+        var newlines = lines
 
-        strMap.forEach { newInput = newInput.replacingOccurrences(of: $0.key, with: $0.value) }
+        newlines = newlines.map { line in
+            strMap.reduce(line) { ln, str in
+                ln.replacingOccurrences(of: str.key, with: str.value)
+            }
+        }
 
-        return a(input: newInput)
+        return a(lines: newlines)
     }
 }

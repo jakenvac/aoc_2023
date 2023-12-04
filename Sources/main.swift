@@ -5,6 +5,7 @@ var days: [Int: Solver.Type] = [:]
 days[1] = DayOne.self
 days[2] = DayTwo.self
 days[3] = DayThree.self
+days[4] = DayFour.self
 
 struct AOCError: Error {
     var message: String
@@ -30,7 +31,9 @@ struct AOC: ParsableCommand {
             throw AOCError(message: "No solution found for day \(day).")
         }
 
-        let result = solver.init().solve(part: part, input: input)
+        let lines = input.split(separator: "\n").map { String($0) }
+
+        let result = solver.init().solve(part: part, lines: lines)
         print(result)
     }
 }

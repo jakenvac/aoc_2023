@@ -3,9 +3,7 @@ import RegexBuilder
 struct DayTwo: Solver {
     let day = 2
 
-    func a(input: String) -> Int {
-        let lines = input.split(separator: "\n")
-
+    func a(lines: [String]) -> Int {
         let setRegex = #/(\d+) ([a-z]+)/#
         let gameRegex = #/^Game (\d+):/#
 
@@ -38,9 +36,7 @@ struct DayTwo: Solver {
         return mapped.reduce(0, +)
     }
 
-    func b(input: String) -> Int {
-        let lines = input.split(separator: "\n")
-
+    func b(lines: [String]) -> Int {
         let setRegex = #/(\d+) ([a-z]+)/#
 
         let mapped: [Int] = lines.compactMap { line in
