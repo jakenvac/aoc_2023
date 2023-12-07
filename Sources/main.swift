@@ -8,6 +8,7 @@ days[3] = DayThree.self
 days[4] = DayFour.self
 days[5] = DayFive.self
 days[6] = DaySix.self
+days[7] = DaySeven.self
 
 struct AOCError: Error {
     var message: String
