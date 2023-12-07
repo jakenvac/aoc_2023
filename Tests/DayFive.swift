@@ -55,8 +55,6 @@ class DayFiveSpec: QuickSpec {
             }
 
             it("Should solve part B") {
-                let input = """
-                """.split(separator: "\n").map { String($0) }
                 let expected = 46
                 let output = day.b(lines: input)
                 expect(output).to(equal(expected))

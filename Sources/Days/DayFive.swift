@@ -83,12 +83,32 @@ struct DayFive: Solver {
         return merged
     }
 
+    func getLeftovers(range: Range<Int>, mapped: [Range<Int>]) -> [Range<Int>] {
+        var result = [Range<Int>]()
+        var currentStart = range.lowerBound
+
+        for checkRange in mapped.sorted(by: { $0.lowerBound < $1.lowerBound }) {
+            if currentStart < checkRange.lowerBound {
+                result.append(currentStart ..< checkRange.lowerBound)
+            }
+            currentStart = max(currentStart, checkRange.upperBound)
+        }
+
+        if currentStart < range.upperBound {
+            result.append(currentStart ..< range.upperBound)
+        }
+
+        return result.filter { !$0.isEmpty }
+    }
+
     func mapSourceRangeToDestRange(source: Range<Int>, map: SeedMap) -> [Range<Int>] {
+        var coveredRanges = [Range<Int>]()
         var newRanges = map.ranges.compactMap { r -> Range<Int>? in
             let mappable = (r.sourceRange ..< r.sourceRange + r.length).clamped(to: source)
             if mappable.count == 0 {
                 return nil
             }
+            coveredRanges.append(mappable)
             let mapped = mapRange(
                 input: mappable,
                 left: r.sourceRange ..< (r.sourceRange + r.length),
@@ -99,6 +119,9 @@ struct DayFive: Solver {
 
         if newRanges.count == 0 {
             newRanges.append(source)
+        } else {
+            let leftovers = getLeftovers(range: source, mapped: coveredRanges)
+            newRanges.append(contentsOf: leftovers)
         }
 
         return mergeRanges(ranges: newRanges)
